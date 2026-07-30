@@ -31,4 +31,5 @@ No build. Verification = run the context-audit checklist against this repo
 - Standard definition: `reference/`
 - What gets installed in a repo: `templates/`
 - Replication mechanism: `skills/context-init/`, `skills/context-audit/`
+- Methodology skills (globally installable): `skills/tracing-root-causes/`, `skills/reviewing-plans/`
 - Global layer content: `global/`
