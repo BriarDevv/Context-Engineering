@@ -35,3 +35,4 @@ No build. Verification = run the context-audit checklist against this repo
 - Replication mechanism: `skills/context-init/`, `skills/context-audit/`
 - Methodology skills (globally installable): `skills/tracing-root-causes/`, `skills/reviewing-plans/`
 - Global layer content: `global/`
+- Worked example of the standard: `examples/nextjs-ecommerce/`
