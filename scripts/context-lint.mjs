@@ -4,6 +4,8 @@
 // adapters, read orders, block structure, broken local links, docs naming,
 // skill hygiene, and static command drift. Judgment checks (inferable
 // content, rules-vs-taste) remain in the context-audit skill.
+// A CLAUDE.md titled "# Global instructions" is checked against the
+// global-layer canon (≤40 lines, free-form sections) instead of the repo one.
 //
 // Usage: node scripts/context-lint.mjs [path] [options]
 //   --budget N     root CLAUDE.md target lines (default 60)
@@ -21,6 +23,7 @@ import { basename, dirname, join, relative, resolve } from "node:path";
 // ---------- args ----------
 const argv = process.argv.slice(2);
 let root = ".";
+// Budget defaults mirror reference/claude-md.md — change both together.
 let budget = 60;
 let cap = 100;
 let json = false;
@@ -71,10 +74,16 @@ for (const f of files) {
 }
 
 // ---------- CLAUDE.md budgets ----------
+// A CLAUDE.md titled "# Global instructions" is the global layer (~/.claude):
+// its canon is ≤40 lines with free-form sections (reference/global-vs-repo.md),
+// not the repo 4-block structure.
 const claudes = files.filter((f) => basename(f) === "CLAUDE.md");
+const globals = new Set(claudes.filter((f) => fileLines(f)[0]?.trim() === "# Global instructions"));
 for (const f of claudes) {
   const n = rawCount(f);
-  if (f === "CLAUDE.md") {
+  if (globals.has(f)) {
+    if (n > 40) add("medium", "budget", f, `${n} lines — global CLAUDE.md cap is 40`);
+  } else if (f === "CLAUDE.md") {
     if (n > cap) add("high", "budget-cap", f, `${n} lines — over the hard cap (${cap})`);
     else if (n > budget) add("medium", "budget", f, `${n} lines — over target (${budget})`);
   } else {
@@ -110,7 +119,7 @@ for (const f of [...claudes, ...agents]) {
 
 // ---------- block structure ----------
 const CANON = ["Commands", "Gotchas", "Hard constraints", "Map"];
-for (const f of claudes) {
+for (const f of claudes.filter((f) => !globals.has(f))) {
   const h2 = fileLines(f)
     .filter((l) => l.startsWith("## "))
     .map((l) => l.slice(3).trim());

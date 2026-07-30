@@ -27,3 +27,5 @@ Source: [The new rules of context engineering for Claude 5 generation models](ht
 
 ≤40 lines. Identity/tone, safety, minimal working style. Zero procedural
 content — workflows live in global skills with progressive disclosure.
+The file's H1 is `# Global instructions` — tooling (context-lint) recognizes
+the global canon by that title.

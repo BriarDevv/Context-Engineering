@@ -36,6 +36,13 @@ const cases = [
     fail: true,
     expect: ["read-order", "broken-link"],
   },
+  {
+    name: "global-layer CLAUDE.md passes its own canon",
+    path: join(here, "fixtures", "global-layer"),
+    fail: false,
+    expect: [],
+    forbid: ["budget", "budget-cap", "structure"],
+  },
 ];
 
 let failed = 0;
