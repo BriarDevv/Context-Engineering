@@ -35,5 +35,6 @@ not the file contents"), then the prompt.
 The 2025-era OMC pack (19 global agents, 2,570 lines) was audited and removed
 2026-07-30: nearly all duplicated native agent types or plugins, and the two
 genuinely useful methodologies were salvaged as skills (`tracing-root-causes`,
-`reviewing-plans`). Full matrix: `docs/adrs/ADR-003-omc-removal.md`. The
+`reviewing-plans`), now maintained in the standalone `skills` repo. Full
+matrix: `docs/adrs/ADR-003-omc-removal.md`. The
 cautionary tale behind the decision rule above: inventory before authoring.

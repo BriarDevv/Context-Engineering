@@ -37,6 +37,5 @@ automate); see `skills/context-audit/SKILL.md`.
 - Standard definition: `reference/`
 - What gets installed in a repo: `templates/`
 - Replication mechanism: `skills/context-init/`, `skills/context-audit/`
-- Methodology skills (globally installable): `skills/tracing-root-causes/`, `skills/reviewing-plans/`
 - Global layer content: `global/`
 - Worked example of the standard: `examples/nextjs-ecommerce/`
