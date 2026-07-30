@@ -7,8 +7,12 @@ the skills that replicate it (`skills/`), and canonical global-layer content
 
 ## Commands
 
-No build. Verification = run the context-audit checklist against this repo
-(see `skills/context-audit/SKILL.md`).
+- `node scripts/context-lint.mjs <repo-path>` — mechanical compliance check
+- `node tests/run-lint-tests.mjs` — lint self-test against fixtures
+- Self-lint: `node scripts/context-lint.mjs . --ignore examples,tests,global`
+
+Full verification = context-audit checklist (judgment checks the lint cannot
+automate); see `skills/context-audit/SKILL.md`.
 
 ## Gotchas
 

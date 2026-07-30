@@ -24,8 +24,10 @@ that standard and ships the tooling that replicates it.
    commands by running them, and instantiates the skeleton. Legacy context
    (AGENTS.md contracts, adapters, read orders) gets a migration plan before
    anything is touched.
-2. **Check compliance** → run `/context-audit`. Report with score and concrete
-   fixes; it only applies fixes when asked.
+2. **Check compliance** → `node scripts/context-lint.mjs <path>` for the fast
+   mechanical subset (budgets, adapters, read orders, broken links, command
+   drift), or run `/context-audit` for the full judgment review. Report with
+   score and concrete fixes; it only applies fixes when asked.
 3. **Global layer** → content lives in `global/`; the `workstation` repo's
    installer applies it to `~/.claude`. Never edit `~/.claude` by hand from here.
 

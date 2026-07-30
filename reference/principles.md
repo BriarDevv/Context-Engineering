@@ -55,6 +55,16 @@ and kept under `docs/` for just-in-time discovery. A diagram of the folder
 structure is a pre-computed index: stale the day the code moves, and trusted
 anyway.
 
+## Naming as metadata
+
+A name should teach before the file is opened — naming is the cheapest
+AI-friendliness there is, signal at zero token cost. Conventions across the
+standard: skills are kebab-case verb phrases (`tracing-root-causes`);
+decision records are `ADR-NNN-<topic>.md`; specs are `SPEC-<feature>.md`;
+dated working documents carry `YYYY-MM-DD`; folders are named for what they
+contain. When a file needs a comment to explain what it is, the name failed
+first.
+
 ## Long-horizon techniques
 
 - **Sub-agents**: isolate exploration in a separate context; return only a

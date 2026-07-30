@@ -25,6 +25,10 @@ Audit progress:
 **1. Inventory.** Find the repo's context surface: root CLAUDE.md, AGENTS.md,
 any per-tool adapters (CODEX.md, GEMINI.md), nested/per-app CLAUDE.md or
 AGENTS.md, `.claude/skills/` and `skills/`, `docs/` tree. Note line counts.
+If the Context-Engineering repo is available, run its
+`scripts/context-lint.mjs <repo-path>` first — it settles the mechanical
+checks (budgets, adapters, read orders, links, command drift) so the audit
+can spend judgment on the rest.
 
 **2. Load** [references/checklist.md](references/checklist.md) — the full
 check table with pass conditions and severities.
