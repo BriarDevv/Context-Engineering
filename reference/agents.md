@@ -30,10 +30,10 @@ not the file contents"), then the prompt.
 - Repo (`.claude/agents/`): roles that only make sense in one project.
   Rare — prefer repo skills.
 
-## Current state (this machine)
+## History
 
-The global agent set is currently populated by oh-my-claudecode (OMC): 19
-agents (executor, explore, verifier, code-reviewer, planner, architect, …),
-several overlapping native Claude Code agent types. Their fate is decided in
-`global/OMC-DECISION.md` — do not hand-edit `~/.claude/agents/` until that
-ADR is resolved and applied via the workstation installer.
+The 2025-era OMC pack (19 global agents, 2,570 lines) was audited and removed
+2026-07-30: nearly all duplicated native agent types or plugins, and the two
+genuinely useful methodologies were salvaged as skills (`tracing-root-causes`,
+`reviewing-plans`). Full matrix: `docs/adrs/ADR-003-omc-removal.md`. The
+cautionary tale behind the decision rule above: inventory before authoring.

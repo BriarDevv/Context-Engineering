@@ -10,8 +10,8 @@ adapted to the target repo. Ask only what cannot be inferred; verify before
 writing; never touch a legacy repo without an approved migration plan.
 
 Templates live in the Context-Engineering repo: `templates/repo/`,
-`templates/monorepo/`, `templates/community/` (locate it at
-`C:/Briar/repos/mine/Context-Engineering` or ask if moved).
+`templates/monorepo/`, `templates/community/` (locate your local clone — on
+this machine `C:/Briar/repos/mine/Context-Engineering` — or ask).
 
 ## Workflow
 

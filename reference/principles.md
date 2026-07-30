@@ -33,6 +33,24 @@ Code's system prompt for Claude 5 models with no measurable eval loss.
    Now: tests, HTML mockups, rubrics, and code as specification — executable
    or inspectable artifacts beat prose.
 
+## The context stack
+
+One request assembles several layers; the model reads all of them at once and
+must reconcile any conflict. Each fact belongs to exactly one layer:
+
+| Layer | Owns |
+|---|---|
+| Prompt | The task at hand |
+| References (@-mentions) | High-fidelity detail: specs, mockups, code, artifacts |
+| System prompt | The product/harness (not user-editable in Claude Code) |
+| CLAUDE.md | Repo facts: commands, gotchas, hard constraints |
+| Skills | Opinionated recurring workflows, loaded on trigger |
+| Auto-memory | Session-learned facts about the user and ongoing work |
+
+A skill enters play only when its description matches the task — that is why
+the description carries the triggers, and why no other layer should restate
+what a skill owns.
+
 ## Right altitude
 
 System-level guidance must be specific enough to guide behavior and flexible
