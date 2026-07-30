@@ -1,4 +1,4 @@
-# ADR: oh-my-claudecode (OMC) keep/drop/replace decision
+# ADR-003: oh-my-claudecode (OMC) keep/drop/replace decision
 
 Date: 2026-07-30
 Status: Accepted <!-- user instructed removal 2026-07-30 ("sacame OMC"), after
