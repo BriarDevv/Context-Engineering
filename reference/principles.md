@@ -48,6 +48,13 @@ read orders. A map (short pointer list) is acceptable; a toll ("read X before
 doing anything") is not. Metadata beats content: a well-named file teaches
 before it is opened.
 
+Diagrams follow the same rule: one earns its place only when it encodes
+topology the filesystem cannot show (cross-service flows, deploy layout,
+state machines) — written in Mermaid (text the model parses, GitHub renders)
+and kept under `docs/` for just-in-time discovery. A diagram of the folder
+structure is a pre-computed index: stale the day the code moves, and trusted
+anyway.
+
 ## Long-horizon techniques
 
 - **Sub-agents**: isolate exploration in a separate context; return only a

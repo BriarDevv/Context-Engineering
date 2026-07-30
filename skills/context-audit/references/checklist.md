@@ -61,3 +61,4 @@ attention budget or fights model judgment; **medium** = budget/quality drift;
 | Dead docs | Every doc is referenced by an entrypoint/index/skill OR is a rich reference (ADR, spec, test, rubric) | medium |
 | ADRs | Never flag ADRs/specs as bloat — they are rich references by design | — |
 | Prose conventions | No CODE-STYLE.md-type prose that a linter/formatter enforces | medium |
+| Diagrams | Mermaid, encoding non-inferable topology only; no folder-structure diagrams | medium |

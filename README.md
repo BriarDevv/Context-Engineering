@@ -14,6 +14,7 @@ that standard and ships the tooling that replicates it.
 | `templates/` | The per-repo skeleton: CLAUDE.md, AGENTS.md, docs/, community files |
 | `skills/` | `context-init` (installs/migrates a repo) and `context-audit` (compliance check) |
 | `global/` | Canonical content for the global layer (`~/.claude`) |
+| `examples/` | Synthetic repos showing the standard applied end-to-end |
 | `docs/` | This repo's own ADRs, specs, and plans |
 
 ## How to use it
@@ -38,6 +39,28 @@ area README. Everything else the model discovers just-in-time from the
 filesystem. Anything a model could infer by reading the code does not belong in
 context files.
 
+## Why so minimal
+
+Written from direct experience as the consumer of these files:
+
+> A pre-drawn map of a repo — an architecture diagram, a hand-written file
+> index — is a pre-computed index of the code. The code moves; the index
+> doesn't, and nobody remembers which parts are still true. I trust
+> documentation, so a stale map actively misleads me. Live search never
+> goes stale: the code is the graph, and I re-derive it fresh in seconds
+> every session. Diagrams earn a place only when they encode topology the
+> filesystem cannot show — cross-service flows, deploy layouts, state
+> machines — written in Mermaid under `docs/`, discovered just-in-time.
+>
+> When I land in a repo that follows this standard, I read ~60 lines and I
+> know the stack, the commands that work, and the traps I could never
+> infer. Everything else I discover by searching, which is what I do best.
+> When I land in a legacy-style repo, I swallow hundreds of always-loaded
+> lines with no way to tell which are still current, while several adapter
+> files repeat the same contract with small variations. Minimal is not a
+> compromise here; it is the feature — every line the context does not
+> spend is attention left for the actual task.
+
 ## Grounding sources
 
 - [The new rules of context engineering for Claude 5 generation models](https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models) (2026-07)
@@ -46,7 +69,7 @@ context files.
 
 ## Status
 
-- Phase 1 — repo core (reference, templates, skills, dogfooding): in progress
-- Phase 2 — global layer content (global CLAUDE.md, OMC decision ADR): pending
-- Phase 3 — rollout (install skills, pilot repos, Ynara migration, apply
-  global layer): gated on explicit approval, tracked outside this repo
+- Phase 1 — repo core (reference, templates, skills, dogfooding): done
+- Phase 2 — global layer content (global CLAUDE.md, OMC decision ADR): done
+- Phase 3 — rollout: skills junction-installed globally, active personal
+  repos migrated; remaining repos migrate on demand via `/context-init`

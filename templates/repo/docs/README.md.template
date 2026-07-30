@@ -6,3 +6,6 @@
 |---|---|
 | [`adrs/`](adrs/) | Architecture decision records (`ADR-NNN-<topic>.md`) |
 | [`specs/`](specs/) | Feature specs with rich references (`SPEC-<feature>.md`) |
+| [`architecture/`](architecture/) | Mermaid diagrams of non-inferable topology |
+<!-- architecture/ is OPTIONAL — delete the row when nothing qualifies.
+     Criterion in reference/principles.md: only topology code can't show. -->
