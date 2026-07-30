@@ -19,6 +19,8 @@ No build. Verification = run the context-audit checklist against this repo
   `context-init`, never copied verbatim.
 - `global/` is content only. It is applied to `~/.claude` by the `workstation`
   repo installer — never edit `~/.claude` directly from here.
+- `skills/` are junction-linked into `~/.claude/skills` (installed
+  2026-07-30): edits here go live immediately, no copy step.
 
 ## Hard constraints
 
