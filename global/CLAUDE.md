@@ -2,8 +2,7 @@
 
 <!-- Canonical source: Context-Engineering/global/CLAUDE.md.
      Applied to ~/.claude/CLAUDE.md by the workstation installer.
-     The installer must preserve the OMC:START/OMC:END block until
-     global/OMC-DECISION.md is resolved and approved. -->
+     OMC was removed 2026-07-30 (see global/OMC-DECISION.md, Accepted). -->
 
 ## Language
 

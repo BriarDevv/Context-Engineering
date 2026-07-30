@@ -1,7 +1,9 @@
 # ADR: oh-my-claudecode (OMC) keep/drop/replace decision
 
 Date: 2026-07-30
-Status: Proposed <!-- resolves to Accepted only with explicit user approval -->
+Status: Accepted <!-- user instructed removal 2026-07-30 ("sacame OMC"), after
+the 19-agent audit confirmed the matrix below; methodologies salvaged first
+(ADR-002); statusline replaced by the standalone hud repo -->
 
 ## Context
 
