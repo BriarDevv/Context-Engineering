@@ -113,12 +113,10 @@ function resolveRefs(frontmatter, errors) {
 }
 
 // ---------- generate ----------
-export function generate(frontmatter, target) {
-  const wrapper = TARGETS[target];
-  if (!wrapper) throw new Error(`unknown target: ${target}`);
+function collectVars(node) {
   const vars = [];
   for (const group of GROUP_ORDER) {
-    const tokens = frontmatter[group];
+    const tokens = node[group];
     if (!tokens || typeof tokens !== "object") continue;
     for (const [name, value] of Object.entries(tokens)) {
       if (group === "colors") vars.push([`--color-${name}`, value]);
@@ -135,10 +133,32 @@ export function generate(frontmatter, target) {
       }
     }
   }
+  return vars;
+}
+
+const block = (selector, vars) =>
+  `${selector} {\n` + vars.map(([k, v]) => `  ${k}: ${v};`).join("\n") + "\n}\n";
+
+export function generate(frontmatter, target) {
+  const wrapper = TARGETS[target];
+  if (!wrapper) throw new Error(`unknown target: ${target}`);
   const header =
     `/* GENERATED from DESIGN.md (target: ${target}) — do not edit.\n` +
     `   Regenerate: node scripts/design-md-gen.mjs DESIGN.md --target ${target} */\n`;
-  return header + `${wrapper} {\n` + vars.map(([k, v]) => `  ${k}: ${v};`).join("\n") + "\n}\n";
+  let out = header + block(wrapper, collectVars(frontmatter));
+  // Mode groups re-assign the same variables under a selector (dark mode,
+  // scope-widening modes like a "mixto" chrome). Emitted AFTER the main
+  // block — for tailwind4 these are runtime overrides, not @theme entries.
+  const modes = frontmatter.modes;
+  if (modes && typeof modes === "object") {
+    for (const [modeName, mode] of Object.entries(modes)) {
+      if (!mode || typeof mode !== "object") continue;
+      const vars = collectVars(mode);
+      if (!vars.length) continue;
+      out += block(mode.selector || `:root[data-theme="${modeName}"]`, vars);
+    }
+  }
+  return out;
 }
 
 // ---------- CLI ----------

@@ -72,3 +72,4 @@ attention budget or fights model judgment; **medium** = budget/quality drift;
 | Token consumption | Components use generated tokens; no raw hex/px duplicating an existing token | medium |
 | Decisions honored | No `## Decisions` entry contradicted by current code | high |
 | Compilation | Tokens edited only in frontmatter; `design.tokens.css` regenerated (lint `design-drift` clean) | medium |
+| Mode discipline | Theme variants live in frontmatter `modes` with selectors; components consume semantic tokens, never branch on theme | medium |

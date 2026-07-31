@@ -112,6 +112,19 @@ cycle with its own context-init migration gate.
 - Non-CSS targets (native platforms) — new generator targets when needed.
 - The KioscoDiagonal migration and conversion (sub-project 2).
 
+## Amendment 2026-07-30: mode groups
+
+Themed apps (light/dark/mixed) need mode-scoped values without losing
+compilation. Frontmatter gains a `modes:` extension: per-mode token groups
+plus an optional `selector` (default `:root[data-theme="<mode>"]`); the
+generator emits the mode's variables re-assigned under that selector after
+the main block (runtime overrides — outside `@theme` for the tailwind4
+target). A mode that only widens scope is the same value set with an
+extended selector, never a third palette. Extraction distinguishes modes
+from drift by evidence: selector-scoped reassignment of the same variable
+is a mode; unscoped scattered variation is drift
+(`extracting-design-md` eval-04). Audit gains a mode-discipline row.
+
 ## Verification
 
 - `node tests/run-lint-tests.mjs` passes with new design-check fixture cases

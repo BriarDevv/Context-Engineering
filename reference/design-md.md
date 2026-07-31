@@ -24,6 +24,12 @@ repo root (single app) or each app root (monorepo).
   entries `- YYYY-MM-DD — <decision>`. One line per decision; longer
   rationale lives in the prose sections. Entries are standing decisions:
   removing one is an explicit, discussed edit — never a silent drop.
+- Extension `modes:` (frontmatter): per-mode token groups plus an optional
+  `selector` (default `:root[data-theme="<mode>"]`). The generator re-assigns
+  the mode's variables under that selector after the main block. A mode that
+  only widens scope (a "mixto" that is dark applied to the chrome) is the
+  SAME value set with an extended selector — never a third palette.
+  Components consume semantic tokens and never branch on theme.
 - Spec-compliant consumers preserve unknown sections, so the extension keeps
   the file valid for any DESIGN.md-aware tool.
 

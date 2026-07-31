@@ -52,5 +52,23 @@ check(
   dangling.errors.some((e) => e.includes("colors.missing"))
 );
 
+const modesDir = join(here, "fixtures", "design-modes");
+const modesParsed = parseDesignMd(readFileSync(join(modesDir, "DESIGN.md"), "utf8"));
+check("modes fixture parses without errors", modesParsed.errors.length === 0, modesParsed.errors.join("; "));
+for (const [target, file] of [
+  ["tailwind4", "design.tokens.css"],
+  ["cssvars", "expected-cssvars.css"],
+]) {
+  let expected;
+  try {
+    expected = readFileSync(join(modesDir, file), "utf8");
+  } catch {
+    check(`modes ${target} output matches ${file}`, false, `${file} missing`);
+    continue;
+  }
+  const actual = generate(modesParsed.frontmatter, target);
+  check(`modes ${target} output matches ${file}`, actual === expected);
+}
+
 console.log(failed ? `${failed} case(s) failed` : "all gen cases passed");
 process.exit(failed ? 1 : 0);

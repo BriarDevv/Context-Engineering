@@ -62,6 +62,13 @@ const cases = [
     fail: true,
     expect: ["design-ref", "design-ungenerated"],
   },
+  {
+    name: "DESIGN.md with mode groups passes",
+    path: join(here, "fixtures", "design-modes"),
+    fail: false,
+    expect: [],
+    forbid: ["design-frontmatter", "design-ref", "design-drift", "design-ungenerated"],
+  },
 ];
 
 let failed = 0;
