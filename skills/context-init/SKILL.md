@@ -52,6 +52,8 @@ before applying. Skip this step entirely for repos with no legacy context.
 **6. Instantiate.** Fill `{{PLACEHOLDER}}` markers from what steps 1-4
 produced; delete optional sections that have no content (e.g. Map). Monorepo:
 one `app-CLAUDE.md.template` per app, ≤30 lines. Keep existing README/LICENSE.
+UI stack detected in step 1 (frontend framework in the manifests): offer
+`DESIGN.md.template` per app — opt-in, per `reference/design-md.md`.
 Then run the `context-audit` skill as the final gate and report: files
 created, files deleted (migrations), audit score, and before/after line counts
 of always-loaded context when migrating.

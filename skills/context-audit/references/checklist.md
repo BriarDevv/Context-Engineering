@@ -12,6 +12,7 @@ attention budget or fights model judgment; **medium** = budget/quality drift;
 - Structure checks
 - Skills checks
 - Docs checks
+- Design checks
 
 ## CLAUDE.md checks
 
@@ -62,3 +63,12 @@ attention budget or fights model judgment; **medium** = budget/quality drift;
 | ADRs | Never flag ADRs/specs as bloat — they are rich references by design | — |
 | Prose conventions | No CODE-STYLE.md-type prose that a linter/formatter enforces | medium |
 | Diagrams | Mermaid, encoding non-inferable topology only; no folder-structure diagrams | medium |
+
+## Design checks (only for repos/apps with UI)
+
+| Check | Pass condition | Severity |
+|---|---|---|
+| DESIGN.md presence | Every app with UI carries one (root or app root) | medium |
+| Token consumption | Components use generated tokens; no raw hex/px duplicating an existing token | medium |
+| Decisions honored | No `## Decisions` entry contradicted by current code | high |
+| Compilation | Tokens edited only in frontmatter; `design.tokens.css` regenerated (lint `design-drift` clean) | medium |
