@@ -9,6 +9,7 @@ the skills that replicate it (`skills/`), and canonical global-layer content
 
 - `node scripts/context-lint.mjs <repo-path>` — mechanical compliance check
 - `node tests/run-lint-tests.mjs` — lint self-test against fixtures
+- `node tests/run-gen-tests.mjs` — DESIGN.md generator self-test
 - Self-lint: `node scripts/context-lint.mjs . --ignore examples,tests`
 
 Full verification = context-audit checklist (judgment checks the lint cannot
