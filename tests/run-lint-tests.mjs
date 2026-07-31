@@ -43,6 +43,25 @@ const cases = [
     expect: [],
     forbid: ["budget", "budget-cap", "structure"],
   },
+  {
+    name: "clean DESIGN.md passes",
+    path: join(here, "fixtures", "design-clean"),
+    fail: false,
+    expect: [],
+    forbid: ["design-frontmatter", "design-sections", "design-ref", "design-decisions", "design-drift", "design-ungenerated"],
+  },
+  {
+    name: "drifted/undated DESIGN.md fails",
+    path: join(here, "fixtures", "design-bad-a"),
+    fail: true,
+    expect: ["design-decisions", "design-sections", "design-drift"],
+  },
+  {
+    name: "dangling-ref/ungenerated DESIGN.md fails",
+    path: join(here, "fixtures", "design-bad-b"),
+    fail: true,
+    expect: ["design-ref", "design-ungenerated"],
+  },
 ];
 
 let failed = 0;

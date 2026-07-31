@@ -19,6 +19,7 @@
 
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
+import { generate, parseDesignMd } from "./design-md-gen.mjs";
 
 // ---------- args ----------
 const argv = process.argv.slice(2);
@@ -156,6 +157,40 @@ for (const f of files.filter((f) => basename(f) === "SKILL.md")) {
   if (n >= 500) add("medium", "skill-size", f, `${n} lines — SKILL.md must stay <500`);
   if (!/^---[\s\S]{0,400}?\bdescription:/.test(read(f)))
     add("medium", "skill-frontmatter", f, "missing frontmatter description (what + when)");
+}
+
+// ---------- DESIGN.md checks (reference/design-md.md) ----------
+const DESIGN_SECTIONS = ["Overview", "Colors", "Typography", "Layout", "Elevation & Depth", "Shapes", "Components", "Do's and Don'ts"];
+for (const f of files.filter((f) => basename(f) === "DESIGN.md")) {
+  const parsed = parseDesignMd(read(f));
+  const fm = parsed.frontmatter;
+  const refErrors = parsed.errors.filter((e) => e.includes("reference"));
+  if (parsed.errors.length > refErrors.length || !fm.name)
+    add("medium", "design-frontmatter", f, "frontmatter missing/unparseable or lacks `name`");
+  for (const e of refErrors) add("medium", "design-ref", f, e);
+  const knownIdx = parsed.sections.filter((s) => DESIGN_SECTIONS.includes(s.title)).map((s) => DESIGN_SECTIONS.indexOf(s.title));
+  if (knownIdx.some((v, i) => i > 0 && v < knownIdx[i - 1]))
+    add("low", "design-sections", f, "known sections out of spec order");
+  const titles = parsed.sections.map((s) => s.title);
+  for (const dup of new Set(titles.filter((t, i) => titles.indexOf(t) !== i)))
+    add("high", "design-sections", f, `duplicate section "## ${dup}"`);
+  for (const d of parsed.decisions)
+    if (!/^- \d{4}-\d{2}-\d{2} — /.test(d.text))
+      add("medium", "design-decisions", `${f}:${d.lineNo}`, "Decisions entry without a leading YYYY-MM-DD date");
+  const genRel = join(dirname(f), "design.tokens.css").replaceAll("\\", "/");
+  const hasTokens = ["colors", "typography", "spacing", "rounded", "components"].some((g) => fm[g] && Object.keys(fm[g]).length);
+  if (!files.includes(genRel)) {
+    if (hasTokens) add("medium", "design-ungenerated", f, "frontmatter has tokens but no adjacent design.tokens.css");
+  } else if (!parsed.errors.length) {
+    const genText = read(genRel);
+    const m = genText.match(/GENERATED from DESIGN\.md \(target: (\w+)\)/);
+    let fresh = null;
+    try { fresh = m ? generate(fm, m[1]) : null; } catch { /* unknown target */ }
+    const norm = (s) => s.replaceAll("\r\n", "\n");
+    if (!fresh) add("high", "design-drift", genRel, "missing or unknown GENERATED header target");
+    else if (norm(fresh) !== norm(genText))
+      add("high", "design-drift", genRel, "design.tokens.css differs from a fresh generation — regenerate");
+  }
 }
 
 // ---------- static command drift (root CLAUDE.md, ## Commands) ----------
